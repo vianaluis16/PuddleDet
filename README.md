@@ -42,7 +42,49 @@ O desenvolvimento do sistema seguirá as seguintes etapas:
 
 ## 🚀 Como Usar este Repositório
 
-*Ir adicionando conforme avançarmos*
+*Este repositório contém dois scripts principais que devem ser executados via terminal: `FiltroLog.py` (para preparar os dados) e `visualizador.py` (para analisar os dados).*
+
+### Passo 1: Pré-requisitos
+
+Os scripts dependem das bibliotecas `OpenCV` e `NumPy`. Instale-as usando pip:
+```bash
+pip install opencv-python numpy
+```
+### Passo 2: Preparação (Gerar o Log Filtrado)
+O script FiltroLog.py lê o seu arquivo de log bruto original e cria o log_filtrado.txt, que contém os caminhos das imagens (CAMERA2, CAMERA3) e os dados de GPS (NMEAGGA).
+
+Como executar: No seu terminal, execute o script passando o caminho do seu log bruto como argumento.
+
+Exemplo:
+
+```bash
+
+python FiltroLog.py "C:\Caminho\Para\Seu\audit_20250701_4.txt"
+```
+
+Isso irá criar o arquivo log_filtrado.txt dentro da pasta do seu projeto.
+
+### Passo 3: Visualização (Analisar as Imagens)
+O script visualizador.py lê o log_filtrado.txt gerado no passo anterior e exibe as imagens de uma câmera específica, buscando-as na pasta de dados descompactada.
+
+#### Como executar: 
+Execute o script passando dois argumentos:
+
+O caminho para a pasta de dados descompactada (ex: audit_.../).
+
+A câmera que você deseja ver (CAMERA2 ou CAMERA3).
+
+Exemplo para ver a CAMERA2:
+
+```bash
+
+python visualizador.py "C:\Caminho\Para\Sua\audit_20250701_4" "CAMERA2"
+```
+#### Controles do Visualizador:
+
+Qualquer Tecla avança para a próxima imagem.
+
+ESC encerra o visualizador.
 
 ## 📚 Referências
 
