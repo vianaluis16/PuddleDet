@@ -1,0 +1,44 @@
+# ==============================================================================
+# PuddleDet - .gitignore
+# ==============================================================================
+
+# --- Pastas de dados (muito grandes para Git) ---
+dataset_jpg/
+pocas_encontradas_visual/
+pocas_selecionadas/
+
+# --- Arquivos gerados ---
+log_filtrado.txt
+resultado_deteccao.mp4
+*.mp4
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# --- Ambiente Virtual ---
+.venv/
+venv/
+ENV/
+
+# --- IDEs ---
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# --- Sistema ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Logs e temporários ---
+*.log
+*.tmp
+*.bak
