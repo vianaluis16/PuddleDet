@@ -12,8 +12,12 @@ import re
 from pathlib import Path
 
 # --- CONFIGURAÇÃO ---
-PASTA_IMAGENS = "pocas_encontradas_visual"
-ARQUIVO_SAIDA = "resultado_deteccao.mp4"
+# Qual câmera? Ajuste para corresponder ao rodar_deteccao.py
+CAMERA = "camera2"  # << AJUSTE AQUI: "camera2" ou "camera3"
+
+PASTA_IMAGENS = f"pocas_encontradas_{CAMERA}"
+ARQUIVO_SAIDA = f"resultado_{CAMERA}.mp4"
+
 FPS = 30
 EXTENSOES_VALIDAS = {".jpg", ".jpeg", ".png", ".bmp", ".webp"}
 

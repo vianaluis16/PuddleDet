@@ -1,44 +1,47 @@
-# ==============================================================================
-# PuddleDet - .gitignore
-# ==============================================================================
+﻿# Datasets
+Puddle-1000_Dataset2/
+dataset-puddle-5777/
+Find-puddles-2-1/
+puddle1000_yolo/
+*.zip
 
-# --- Pastas de dados (muito grandes para Git) ---
-dataset_jpg/
-pocas_encontradas_visual/
-pocas_selecionadas/
+# Checkpoints e modelos treinados
+*.pt
+runs/
 
-# --- Arquivos gerados ---
-log_filtrado.txt
-resultado_deteccao.mp4
-*.mp4
+# Resultados temporários
+teste_deteccao/
+para_anotar/
+para_anotar_rodada2/
+pocas_encontradas_camera2/
+*.jpg
+*.png
 
-# --- Python ---
+# Papers
+*.pdf
+
+# Logs
+*.txt
+
+# Python
 __pycache__/
-*.py[cod]
-*$py.class
-*.so
+*.pyc
+*.pyo
+*.pyd
 .Python
+*.so
+*.egg
 *.egg-info/
 dist/
 build/
 
-# --- Ambiente Virtual ---
-.venv/
-venv/
-ENV/
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
 
-# --- IDEs ---
-.idea/
+# IDE
 .vscode/
+.idea/
 *.swp
 *.swo
-
-# --- Sistema ---
-.DS_Store
-Thumbs.db
-desktop.ini
-
-# --- Logs e temporários ---
-*.log
-*.tmp
-*.bak
+*~

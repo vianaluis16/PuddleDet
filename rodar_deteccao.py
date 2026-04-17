@@ -1,13 +1,6 @@
 """
 rodar_deteccao.py
-
-Script para detecção de poças d'água em imagens urbanas utilizando YOLO.
-
-Projeto: PuddleDet - Detecção Automatizada de Poças d'Água
-Universidade Federal do Espírito Santo (UFES)
-Pesquisa: Aplicações de Inteligência Artificial em Robótica (PRPPG 13356/2024)
-
-Autor: Luis Viana
+Script para detecção de poças d'água usando modelo YOLO treinado.
 """
 
 import os
@@ -15,11 +8,16 @@ import sys
 from pathlib import Path
 
 # --- CONFIGURAÇÃO ---
-MODELO_PATH = "best.pt"
-PASTA_ENTRADA = "dataset_jpg"
-PASTA_SAIDA = "pocas_encontradas_visual"
+MODELO_PATH = "best_fine_tuned.pt"  # Modelo ajustado com anotações customizadas
+
+# Qual câmera processar? Ajuste para corresponder ao convert_data.py
+CAMERA = "camera2"  # << AJUSTE AQUI: "camera2" ou "camera3"
+
+PASTA_ENTRADA = f"dataset_jpg_{CAMERA}"
+PASTA_SAIDA = f"pocas_encontradas_{CAMERA}"
+
 EXTENSOES_VALIDAS = {".jpg", ".jpeg", ".png", ".bmp", ".webp"}
-CONFIDENCE_THRESHOLD = 0.25  # Ajustável conforme necessário
+CONFIDENCE_THRESHOLD = 0.25  # Aumentado - modelo fine-tuned é mais confiante
 
 
 def main():
