@@ -7,6 +7,8 @@ puddle1000_yolo/
 
 # Checkpoints e modelos treinados
 *.pt
+!best.pt
+!best_fine_tuned.pt
 runs/
 
 # Resultados temporários
