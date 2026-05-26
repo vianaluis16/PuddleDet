@@ -1,4 +1,4 @@
-﻿# Datasets
+# Datasets
 Puddle-1000_Dataset2/
 dataset-puddle-5777/
 Find-puddles-2-1/
@@ -14,8 +14,10 @@ teste_deteccao/
 para_anotar/
 para_anotar_rodada2/
 pocas_encontradas_camera2/
+cache/
 *.jpg
 *.png
+*.html
 
 # Papers
 *.pdf

@@ -8,7 +8,9 @@ O **PuddleDet** é um projeto de iniciação científica da Universidade Federal
 
 ## 📖 Visão Geral
 
-O projeto visa desenvolver um sistema automatizado para a **detecção e georreferenciamento de poças d'água** em ambientes urbanos, utilizando técnicas avançadas de inteligência artificial e visão computacional. A solução proposta associa a detecção visual de lâminas d'água à sua localização geográfica precisa, permitindo além da reação em tempo real dos veículos, também o planejamento de rotas seguras e a criação de mapas colaborativos de condições viárias a fim de identificar falhas nas vias urbanas.
+O projeto visa desenvolver um sistema automatizado para a **detecção e georreferenciamento de poças d'água** em ambientes urbanos, utilizando técnicas de inteligência artificial e visão computacional.
+
+Atualmente, a **segmentação semântica é a única fonte de detecção** adotada no PuddleDet. O pipeline principal utiliza um modelo RAU-FCN treinado para identificar pixels de água/poça e gerar máscaras sobrepostas nas imagens.
 
 ## 🎯 Problema e Motivação
 
@@ -24,8 +26,8 @@ Desenvolver e validar um sistema automatizado para detecção e georreferenciame
 
 ### Objetivos Específicos
 * **Analisar bases de dados** públicas com imagens urbanas e metadados georreferenciados.
-* **Pré-processar e armazenar** os dados para o treinamento de modelos de IA.
-* **Implementar e treinar** modelos de Redes Neurais Convolucionais (CNNs) para a detecção.
+* **Pré-processar e armazenar** os dados para o treinamento de modelos de segmentação.
+* **Implementar e treinar** modelos de segmentação semântica para a detecção de poças.
 * **Desenvolver um módulo de georreferenciamento** para associar detecções a coordenadas geográficas.
 * **Validar o sistema** em cenários simulados e, se possível, com dados reais.
 
@@ -35,58 +37,61 @@ O desenvolvimento do sistema seguirá as seguintes etapas:
 
 1.  **Levantamento de Dados:** Análise crítica de bases de dados públicas como **BDD100K**, **Mapillary Vistas** e **Cityscapes**.
 2.  **Pré-processamento:** Adaptação, padronização e anotação das imagens e metadados para garantir a qualidade dos dados de treinamento.
-3.  **Treinamento de Modelos:** Implementação de arquiteturas de CNN como **YOLOv8** ou **U-Net**.
+3.  **Treinamento de Modelos:** Implementação e ajuste de arquitetura de segmentação semântica (**RAU-FCN**).
 4.  **Avaliação:** Análise de desempenho dos modelos.
 5.  **Georreferenciamento:** Desenvolvimento de um módulo para integrar as detecções com as coordenadas de GPS, permitindo a criação de mapas de risco.
 6.  **Validação:** Testes em cenários simulados e em campo, utilizando hardware disponível (câmeras, módulos GPS e suportes impressos em 3D).
 
 ## 🚀 Como Usar este Repositório
 
-*Este repositório contém dois scripts principais que devem ser executados via terminal: `FiltroLog.py` (para preparar os dados) e `visualizador.py` (para analisar os dados).*
+O fluxo principal de inferência neste repositório é a segmentação semântica com o script `testar_segmentacao_novas.py`.
 
 ### Passo 1: Pré-requisitos
 
-Os scripts dependem das bibliotecas `OpenCV` e `NumPy`. Instale-as usando pip:
-```bash
-pip install opencv-python numpy
-```
-### Passo 2: Preparação (Gerar o Log Filtrado)
-O script FiltroLog.py lê o seu arquivo de log bruto original e cria o log_filtrado.txt, que contém os caminhos das imagens (CAMERA2, CAMERA3) e os dados de GPS (NMEAGGA).
-
-Como executar: No seu terminal, execute o script passando o caminho do seu log bruto como argumento.
-
-Exemplo:
+Instale as dependências do projeto:
 
 ```bash
-
-python FiltroLog.py "C:\Caminho\Para\Seu\audit_20250701_4.txt"
+pip install -r requirements.txt
 ```
 
-Isso irá criar o arquivo log_filtrado.txt dentro da pasta do seu projeto.
+### Passo 2: Preparar as imagens de entrada
 
-### Passo 3: Visualização (Analisar as Imagens)
-O script visualizador.py lê o log_filtrado.txt gerado no passo anterior e exibe as imagens de uma câmera específica, buscando-as na pasta de dados descompactada.
+Coloque as imagens a serem avaliadas na pasta:
 
-#### Como executar: 
-Execute o script passando dois argumentos:
+```text
+imagensNovas/
+```
 
-O caminho para a pasta de dados descompactada (ex: audit_.../).
+Extensões suportadas pelo script: `.jpg`, `.jpeg`, `.png`, `.bmp`, `.webp`.
 
-A câmera que você deseja ver (CAMERA2 ou CAMERA3).
+### Passo 3: Executar a segmentação
 
-Exemplo para ver a CAMERA2:
+Execute:
 
 ```bash
-
-python visualizador.py "C:\Caminho\Para\Sua\audit_20250701_4" "CAMERA2"
+python testar_segmentacao_novas.py
 ```
-#### Controles do Visualizador:
 
-Qualquer Tecla avança para a próxima imagem.
+O script utiliza por padrão o modelo:
 
-ESC encerra o visualizador.
+```text
+runs/rau_fcn/puddle1000_rau_light/best.pt
+```
+
+### Passo 4: Ver resultados
+
+As imagens segmentadas (overlay com máscara da classe poça) são salvas em:
+
+```text
+resultados_novos/segmentacao/
+```
+
+Ao final da execução, o script imprime:
+* quantidade de imagens processadas;
+* quantidade de imagens com detecção de poça;
+* diretório de saída dos resultados.
 
 ## 📚 Referências
 
-*Este projeto se baseia em diversas pesquisas recentes na área, como: U-Net (Ronneberger et al., 2015), Mask R-CNN (He et al., 2017), e YOLOv8 (Varghese & M., 2024)*
-*Ir adicionando conforme avançarmos*
+*Este projeto se baseia em pesquisas na área de segmentação semântica, incluindo FCN/U-Net e variações com módulos de atenção para segmentação de cenas urbanas.*
+*Ir adicionando conforme avançarmos.*
